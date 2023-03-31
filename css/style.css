@@ -3,6 +3,30 @@
     --font-family: Arial, Helvetica, sans-serif;
 }
 
+html {
+    border-color: #736b5e;
+    /*scrollbar-color: rgb(69, 74, 77), rgb(32, 35, 36), rgb(32, 35, 36), rgb(32, 35, 36);*/
+}
+
+body {
+    background-color: #131516;
+    color: #e8e6e3;
+}
+
+button {
+    background-color: #2b2a33;
+    color: #e8e6e3;
+}
+
+input {
+    background-color: #2b2a33;
+    color: #e8e6e3;
+}
+
+::placeholder {
+	color: #b2aba1;
+}
+
 .japanese {
     font-family: var(--font-family);
     font-size: 40px;
