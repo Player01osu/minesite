@@ -32,6 +32,10 @@ input {
     font-size: 40px;
 }
 
+.japanese img {
+    max-width: 100%;
+}
+
 #wrap {
     margin: auto;
     width: 30%;
