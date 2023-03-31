@@ -20,8 +20,6 @@ if (cache === null) {
     cache = new Queue();
 }
 
-// First child of empty div is an empty text.
-main.removeChild(main.firstChild);
 main_input.autofocus = true;
 export_cache.href = export_cache_encode(cache_contents_raw());
 
