@@ -1,3 +1,18 @@
+function get_checked() {
+    // Get all divs with class "card".
+    const cards = document.getElementsByClassName("card");
+    const checked_array = [];
+    // Iterate through divs.
+    for (let i = 0; i < cards.length; ++i) {
+        // If it's checkmark is true, append div to checked_array.
+        if (cards[i].getElementsByClassName("pop_mark")[0].checked) {
+            checked_array.push(cards[i]);
+        }
+    }
+
+    return checked_array;
+}
+
 function exists(item) {
     return item !== null && item !== undefined && item !== "";
 }
@@ -100,61 +115,29 @@ function new_card(text, content, image_path, audio_path) {
     return card_div;
 }
 
-function cache_write() {
-    const encoded_cache = b64_encode_unicode(JSON.stringify(cache));
-
-    export_cache.href = export_cache_encode(encoded_cache);
-    local_storage.setItem("cache", encoded_cache);
-}
-
-function cache_enqueue(text, content, image_path, audio_path) {
-    cache.enqueue({"text": text, "content": content, "image_path": image_path, "audio_path": audio_path});
-    cache_write();
-}
-
-function cache_dequeue() {
-    if (cache.dequeue() !== null) {
-        cache_write();
-        return true;
+function submit_onenter(e) {
+    switch (e.keyCode) {
+        case 16:
+        case 17:
+            return;
+        case 13:
+            add_note_from_inputs();
+        default:
+            window.scrollTo(0, document.body.scrollHeight);
+            break;
     }
-    return false;
 }
 
-function cache_dequeue_back() {
-    if (cache.dequeue_back() !== null) {
-        cache_write();
-        return true;
-    }
-    return false;
+function reset_window() {
+    window.scrollTo(0, document.body.scrollHeight);
+    main_input.focus();
 }
 
-function cache_clear() {
-    cache = new Queue();
-    local_storage.clear();
-    cache_write();
+function reset_input() {
+    reset_window();
+
+    main_input.value = "";
+    audio_input.value = "";
+    image_input.value = "";
 }
 
-function cache_contents_raw() {
-    return local_storage.getItem("cache");
-}
-
-function cache_contents() {
-    const cache_raw = cache_contents_raw();
-    if (cache_raw === null) {
-        return null;
-    }
-    return JSON.parse(unicode_decode_b64(cache_raw));
-}
-
-
-function b64_encode_unicode(str) {
-  return btoa(encodeURIComponent(str));
-}
-
-function unicode_decode_b64(str) {
-  return decodeURIComponent(atob(str));
-}
-
-function export_cache_encode(encoded_cache) {
-    return "data:application/json;," + encoded_cache;
-}

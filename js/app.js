@@ -37,19 +37,6 @@ main_input.onkeydown = submit_onenter;
 
 reset_window();
 
-function submit_onenter(e) {
-    switch (e.keyCode) {
-        case 16:
-        case 17:
-            return;
-        case 13:
-            add_note_from_inputs();
-        default:
-            window.scrollTo(0, document.body.scrollHeight);
-            break;
-    }
-}
-
 function add_note_from_inputs() {
     const main_value = main_input.value;
     if (main_value.length === 0) {
@@ -83,19 +70,6 @@ function add_note_from_inputs() {
     reset_input();
 }
 
-function reset_window() {
-    window.scrollTo(0, document.body.scrollHeight);
-    main_input.focus();
-}
-
-function reset_input() {
-    reset_window();
-
-    main_input.value = "";
-    audio_input.value = "";
-    image_input.value = "";
-}
-
 clear_cache.onclick = () => {
     cache_clear();
 
@@ -104,21 +78,6 @@ clear_cache.onclick = () => {
       main.removeChild(main.firstChild);
     }
 };
-
-function get_checked() {
-    // Get all divs with class "card".
-    const cards = document.getElementsByClassName("card");
-    const checked_array = [];
-    // Iterate through divs.
-    for (let i = 0; i < cards.length; ++i) {
-        // If it's checkmark is true, append div to checked_array.
-        if (cards[i].getElementsByClassName("pop_mark")[0].checked) {
-            checked_array.push(cards[i]);
-        }
-    }
-
-    return checked_array;
-}
 
 clear_checked.onclick = () => {
     const checked = get_checked();
