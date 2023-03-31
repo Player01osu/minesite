@@ -57,6 +57,9 @@ function new_div(parent, id, class_name) {
     return div;
 }
 
+function toggle_hidden(element) {
+    element.hidden = !element.hidden;
+}
 
 function new_card(text, content, image_path, audio_path) {
     const card_div = new_div(main, null, "card");
@@ -67,16 +70,16 @@ function new_card(text, content, image_path, audio_path) {
     if (exists(image_path)) {
         const image_button = new_button(card_div, "image", () => {
             const img_id = "img" + image_path;
-            let img = document.getElementById(img_id);
+            let img_div = document.getElementById(img_id);
 
-            if (exists(img)) {
-                card_div.removeChild(img);
+            if (exists(img_div)) {
+                toggle_hidden(img_div);
             } else {
-                img = document.createElement("img");
+                img_div = document.createElement("div");
+                const img = document.createElement("img");
                 img.src = image_path;
-                img.onclick = () => card_div.removeChild(img_div);
+                img.onclick = () => img_div.hidden = true;
 
-                const img_div = document.createElement("div");
                 img_div.className = "images";
                 img_div.id = img_id;
                 img_div.appendChild(img);
