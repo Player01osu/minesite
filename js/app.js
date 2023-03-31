@@ -38,9 +38,15 @@ main_input.onkeydown = submit_onenter;
 reset_window();
 
 function submit_onenter(e) {
-    window.scrollTo(0, document.body.scrollHeight);
-    if (e.keyCode === 13) {
-        add_note_from_inputs();
+    switch (e.keyCode) {
+        case 16:
+        case 17:
+            return;
+        case 13:
+            add_note_from_inputs();
+        default:
+            window.scrollTo(0, document.body.scrollHeight);
+            break;
     }
 }
 
