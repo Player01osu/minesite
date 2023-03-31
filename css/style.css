@@ -39,3 +39,27 @@
 .card_button {
     font-size: 17px;
 }
+
+#codebox {
+    display: block;
+    font-family: mono;
+    background-color: #262730;
+    white-space: pre-wrap;
+    font-size: 17px;
+    overflow: auto;
+    scrollbar-width: thin;
+
+    padding: 0.50em;
+    padding-left: 0.68em;
+    border: 1px solid;
+
+}
+
+#codebox code {
+    padding: 0;
+}
+
+.token_command {
+    color: #E3E37D;
+    font-weight: bold;
+}

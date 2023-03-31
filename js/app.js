@@ -8,6 +8,8 @@ const pop_front = document.getElementById("pop_front");
 const clear_checked = document.getElementById("clear_checked");
 const export_cache = document.getElementById("export_cache");
 
+const codebox = document.getElementById("codebox");
+
 const main = document.getElementById("main");
 const local_storage = window.localStorage;
 
@@ -146,3 +148,13 @@ pop_front.onclick = () => {
         main.removeChild(main.firstChild);
     }
 };
+
+function codebox_content() {
+    const inner_text = codebox.children[0].innerText
+    return inner_text.substring(2, inner_text.length);
+}
+
+codebox.onclick = () => {
+    navigator.clipboard.writeText(codebox_content());
+    alert("Copied command to clipboard");
+}
