@@ -62,7 +62,7 @@ function add_note_from_inputs() {
     let image_path = image_input.value;
 
     if (audio_value.length !== 0) {
-        audio_value = "{sound:" + audio_value + "}";
+        audio_value = "[sound:" + audio_value + "]";
         audio_path = "./media/" + audio_input.value;
     }
 
