@@ -13,12 +13,10 @@ const codebox = document.getElementById("codebox");
 const main = document.getElementById("main");
 const local_storage = window.localStorage;
 
-let cache = new Queue(cache_contents());
-let cache_alt = new Queue();
-// TODO
-let cache_ptr = cache;
+const caches = {"current": 0, "cache": [new Queue(cache_contents()), new Queue()]};
+let cache = caches.cache[0];
 
-if (cache === null) {
+if (!exists(cache)) {
     cache = new Queue();
 }
 
@@ -81,24 +79,28 @@ clear_cache.onclick = () => {
 
 clear_checked.onclick = () => {
     const checked = get_checked();
-    const text_array = {};
-
+    const text_set = {};
     if (checked.length === 0) {
         return;
     }
 
+    const cache_new = caches.cache[caches.current];
+
+    caches.current = !caches.current | 0;
+    cache_new.clear()
+
     for (let i = 0; i < checked.length; ++i) {
-        text_array[checked[i].firstChild.textContent] = true;
+        text_text[checked[i].firstChild.textContent] = true;
         main.removeChild(checked[i]);
     }
 
     for (let i = cache.head; i < cache.tail; ++i) {
-        if (text_array[cache.elements[i].text] === undefined) {
-            cache_alt.enqueue(cache.elements[i]);
+        if (!exists(text_set[cache.elements[i].text])) {
+            cache_new.enqueue(cache.elements[i]);
         }
     }
 
-    cache = cache_alt;
+    cache = cache_new;
     cache_write();
 };
 

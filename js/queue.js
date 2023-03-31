@@ -36,6 +36,11 @@ class Queue {
         return element;
     }
 
+    clear() {
+        this.head = 0;
+        this.tail = 0;
+    }
+
     length() {
         return this.tail - this.head;
     }
