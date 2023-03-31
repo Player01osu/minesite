@@ -84,13 +84,13 @@ clear_checked.onclick = () => {
         return;
     }
 
-    const cache_new = caches.cache[caches.current];
 
     caches.current = !caches.current | 0;
+    const cache_new = caches.cache[caches.current];
     cache_new.clear()
 
     for (let i = 0; i < checked.length; ++i) {
-        text_text[checked[i].firstChild.textContent] = true;
+        text_set[checked[i].firstChild.textContent] = true;
         main.removeChild(checked[i]);
     }
 

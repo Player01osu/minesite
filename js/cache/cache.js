@@ -27,8 +27,8 @@ function cache_dequeue_back() {
 }
 
 function cache_clear() {
-    cache = new Queue();
-    local_storage.clear();
+    cache.clear();
+    local_storage.setItem("cache", null);
     cache_write();
 }
 
