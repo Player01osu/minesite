@@ -13,6 +13,8 @@ const local_storage = window.localStorage;
 
 let cache = new Queue(cache_contents());
 let cache_alt = new Queue();
+// TODO
+let cache_ptr = cache;
 
 if (cache === null) {
     cache = new Queue();
@@ -22,7 +24,6 @@ if (cache === null) {
 main.removeChild(main.firstChild);
 main_input.autofocus = true;
 export_cache.href = export_cache_encode(cache_contents_raw());
-reset_window();
 
 // Add items from cache.
 for (let i = cache.head; i < cache.tail; ++i) {
@@ -34,7 +35,7 @@ audio_input.onkeydown = submit_onenter;
 image_input.onkeydown = submit_onenter;
 main_input.onkeydown = submit_onenter;
 
-window.scrollTo(0, document.body.scrollHeight);
+reset_window();
 
 function submit_onenter(e) {
     window.scrollTo(0, document.body.scrollHeight);
