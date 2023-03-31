@@ -33,6 +33,12 @@ audio_input.onkeydown = submit_onenter;
 image_input.onkeydown = submit_onenter;
 main_input.onkeydown = submit_onenter;
 
+document.onkeypress = (e) => {
+    if (e.charCode === 105) {
+        reset_window();
+    }
+};
+
 reset_window();
 
 function add_note_from_inputs() {
