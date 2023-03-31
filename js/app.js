@@ -105,7 +105,7 @@ function get_checked() {
     // Iterate through divs.
     for (let i = 0; i < cards.length; ++i) {
         // If it's checkmark is true, append div to checked_array.
-        if (cards[i].childNodes[3].checked) {
+        if (cards[i].getElementsByClassName("pop_mark")[0].checked) {
             checked_array.push(cards[i]);
         }
     }

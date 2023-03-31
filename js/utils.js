@@ -84,6 +84,7 @@ function new_card(text, content, image_path, audio_path) {
     }
 
     const check = new_input(card_div, "checkbox");
+    check.className = "pop_mark";
 
     if (exists(audio_path)) {
         const audio = new_audio(card_div, audio_path);
