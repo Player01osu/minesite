@@ -1,0 +1,25 @@
+/*.p1 {
+*  font-family: "Noto Serif CJK JP", Times, serif;
+*}
+*/
+.japanese {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+}
+
+#wrap {
+    margin: auto;
+    width: 30%;
+    padding: 4px;
+    text-align: left;
+}
+
+.inputs {
+    height: 30px;
+    font-size: 17px;
+}
+
+.buttons {
+    height: 30px;
+    font-size: 17px;
+}

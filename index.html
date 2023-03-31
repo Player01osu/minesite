@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="jp">
+    <head>
+        <title>Anki Miner</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="main" class="japanese">
+            </div>
+
+            <input id="main_input" class="inputs" style="width:500px;height:30px;" required>
+            <input id="audio_input" class="inputs" placeholder="audio" style="width:250px;">
+            <input id="image_input" class="inputs" placeholder="image" style="width:250px;">
+            <br>
+            <button class="buttons" id="clear_cache">Clear Cache</button>
+            <button class="buttons" id="pop_back">Pop Back</button>
+            <button class="buttons" id="pop_front">Pop Front</button>
+            <button class="buttons" id="clear_checked">Clear Checked</button>
+            <br>
+            <a id=export_cache href="data:application/json;base64,SGVsbG8sIFdvcmxkIQ==" download="anki_miner.json">Export Cache</a>
+        </div>
+
+        <script src="js/target/app.js" type="text/javascript"></script>
+    </body>
+</html>

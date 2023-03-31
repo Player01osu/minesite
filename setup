@@ -1,0 +1,8 @@
+#!/bin/sh
+set -ve
+
+anki="${XDG_DATA_HOME}/Anki2/User 1/collection.media"
+
+make -C "./js" clean all
+[ -d "./media" ] || mkdir "media"
+[ -d "$anki" ] && [ ! -e $(basename "$anki") ] && ln -s "$anki" ./
