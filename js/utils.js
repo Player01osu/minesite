@@ -33,7 +33,7 @@ function new_button(parent, text, onclick) {
     button.onclick = onclick;
     parent.appendChild(button);
 
-    return parent;
+    return button;
 }
 
 function new_input(parent, type) {
@@ -62,6 +62,7 @@ function new_card(text, content, image_path, audio_path) {
     const card_div = new_div(main, null, "card");
     const para = new_para(card_div, text);
     const copy_button = new_button(card_div, "copy", () => navigator.clipboard.writeText(content));
+    copy_button.className = "card_button";
 
     if (exists(image_path)) {
         const image_button = new_button(card_div, "image", () => {
@@ -81,6 +82,8 @@ function new_card(text, content, image_path, audio_path) {
                 card_div.appendChild(img_div);
             }
         });
+
+        image_button.className = "card_button";
     }
 
     const check = new_input(card_div, "checkbox");
