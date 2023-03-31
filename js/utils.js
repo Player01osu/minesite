@@ -74,6 +74,7 @@ function new_card(text, content, image_path, audio_path) {
             } else {
                 img = document.createElement("img");
                 img.src = image_path;
+                img.onclick = () => card_div.removeChild(img_div);
 
                 const img_div = document.createElement("div");
                 img_div.className = "images";
