@@ -15,11 +15,19 @@
             <input id="image_input" class="inputs" placeholder="image" style="width:250px;">
             <br>
             <button class="buttons" id="clear_cache">Clear Cache</button>
-            <button class="buttons" id="pop_back">Pop Back</button>
             <button class="buttons" id="pop_front">Pop Front</button>
+            <button class="buttons" id="pop_back">Pop Back</button>
             <button class="buttons" id="clear_checked">Clear Checked</button>
             <br>
-            <pre id="codebox"><code>$ <span class="token_command">echo</span> Hello, world!</code></pre>
+            <br>
+            <div id="shell_commands">
+                <button id="move_all" class="buttons">Move All</button>
+                <button id="move_front" class="buttons">Move Front</button>
+                <button id="move_back" class="buttons">Move Back</button>
+                <button id="move_checked" class="buttons">Move Checked</button>
+                <br>
+                <pre id="codebox"><code id="code">$ <span class="token_command">echo</span> Hello, world!</code></pre>
+            </div>
             <br>
             <a id=export_cache href="data:application/json;base64,SGVsbG8sIFdvcmxkIQ==" download="anki_miner.json">Export Cache</a>
         </div>

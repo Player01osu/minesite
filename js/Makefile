@@ -1,4 +1,4 @@
-IN := "queue.js" "app.js" "utils.js"
+IN := "queue.js" "app.js" "utils.js" "shell/console.js" "shell/move.js"
 TARGET_DIR := "target"
 OUT := "$(TARGET_DIR)/app.js"
 
