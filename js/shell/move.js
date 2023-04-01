@@ -2,6 +2,7 @@ const move_all = document.getElementById("move_all");
 const move_front = document.getElementById("move_front");
 const move_back = document.getElementById("move_back");
 const move_checked = document.getElementById("move_checked");
+const console_reset = document.getElementById("console_reset");
 
 move_all.onclick = () => {
     let from_files = "";
@@ -78,3 +79,5 @@ move_checked.onclick = () => {
         code_set("cp", from_files + " './collection.media/'");
     }
 }
+
+console_reset.onclick = () => code_set("echo", "Hello, world!");
