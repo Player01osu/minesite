@@ -2,11 +2,16 @@ const main_input = document.getElementById("main_input");
 const audio_input = document.getElementById("audio_input");
 const image_input = document.getElementById("image_input");
 
+
 const clear_cache = document.getElementById("clear_cache");
 const pop_back = document.getElementById("pop_back");
 const pop_front = document.getElementById("pop_front");
 const clear_checked = document.getElementById("clear_checked");
+
 const export_cache = document.getElementById("export_cache");
+const import_cache = document.getElementById("import_cache");
+
+const n_cards = document.getElementById("n_cards");
 
 const codebox = document.getElementById("codebox");
 
@@ -23,11 +28,28 @@ if (!exists(cache)) {
 main_input.autofocus = true;
 export_cache.href = export_cache_encode(cache_contents_raw());
 
-// Add items from cache.
-for (let i = cache.head; i < cache.tail; ++i) {
-    const element = cache.elements[i];
-    new_card(element.text, element.content, element.image_path, element.audio_path);
+
+function cards_remove() {
+    while(main.firstChild) {
+        main.removeChild(main.firstChild);
+    }
 }
+
+function cards_redraw() {
+    cards_remove();
+    cards_draw();
+}
+
+function cards_draw() {
+    // Add items from cache.
+    for (let i = cache.head; i < cache.tail; ++i) {
+        const element = cache.elements[i];
+        new_card(element.text, element.content, element.image_path, element.audio_path);
+    }
+}
+
+cards_draw();
+
 
 audio_input.onkeydown = submit_onenter;
 image_input.onkeydown = submit_onenter;
@@ -75,13 +97,25 @@ function add_note_from_inputs() {
 }
 
 clear_cache.onclick = () => {
-    cache_clear();
+    if (confirm("Are you sure you want to clear the cache?")) {
+        cache_clear();
 
-    // Remove every para.
-    while (main.firstChild) {
-      main.removeChild(main.firstChild);
+        // Remove every para.
+        while (main.firstChild) {
+            main.removeChild(main.firstChild);
+        }
     }
 };
+
+// Get reference to alternate cache.
+function cache_get_alternate() {
+    return caches.cache[!caches.current | 0];
+}
+
+function cache_alternate() {
+    caches.current = !caches.current | 0;
+    cache = caches.cache[caches.current];
+}
 
 clear_checked.onclick = () => {
     const checked = get_checked();
@@ -90,9 +124,7 @@ clear_checked.onclick = () => {
         return;
     }
 
-
-    caches.current = !caches.current | 0;
-    const cache_new = caches.cache[caches.current];
+    const cache_new = cache_get_alternate();
     cache_new.clear()
 
     for (let i = 0; i < checked.length; ++i) {
@@ -106,19 +138,23 @@ clear_checked.onclick = () => {
         }
     }
 
-    cache = cache_new;
+    cache_alternate();
     cache_write();
+    update_card_count();
 };
 
 pop_back.onclick = () => {
+    // TODO Remove card function/abstraction?
     if (cache_dequeue_back()) {
         main.removeChild(main.lastChild);
+        update_card_count();
     }
 };
 
 pop_front.onclick = () => {
     if (cache_dequeue()) {
         main.removeChild(main.firstChild);
+        update_card_count();
     }
 };
 
@@ -130,4 +166,25 @@ function codebox_content() {
 codebox.onclick = () => {
     navigator.clipboard.writeText(codebox_content());
     alert("Copied command to clipboard");
+}
+
+import_cache.oninput = (e) => {
+    if (confirm("This will overwrite your current cache: Are you sure you want to do this?")) {
+        //console.log(e);
+        const file_promise = Promise.resolve(import_cache.files[0].text());
+        file_promise.then((text) => {
+            const import_json = JSON.parse(unicode_decode_b64(text));
+            console.log(import_json);
+
+            const cache_new = cache_get_alternate();
+
+            cache_new.elements = import_json.elements;
+            cache_new.head = import_json.head;
+            cache_new.tail = import_json.tail;
+
+            cache_alternate();
+            cache_write();
+            cards_redraw();
+        });
+    }
 }

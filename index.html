@@ -20,7 +20,7 @@
             <button class="buttons" id="pop_front">Pop Front</button>
             <button class="buttons" id="pop_back">Pop Back</button>
             <button class="buttons" id="clear_checked">Clear Checked</button>
-            <br>
+            <p id="n_cards"></p>
             <br>
             <div id="shell_commands">
                 <button id="move_all" class="buttons">Move All</button>
@@ -32,7 +32,9 @@
                 <pre id="codebox"><code id="code">$ <span class="token_command">echo</span> Hello, world!</code></pre>
             </div>
             <br>
-            <a id=export_cache href="data:application/json;base64,SGVsbG8sIFdvcmxkIQ==" download="anki_miner.json">Export Cache</a>
+            <label for="import_cache">Import Cache</label>
+            <input type="file" id="import_cache" name="import_cache">
+            <a id="export_cache" href="data:application/json;base64,SGVsbG8sIFdvcmxkIQ==" download="anki_miner.json">Export Cache</a>
         </div>
 
         <script src="js/target/app.js" type="text/javascript"></script>

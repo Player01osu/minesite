@@ -28,6 +28,7 @@ function cache_dequeue_back() {
 
 function cache_clear() {
     cache.clear();
+    update_card_count();
     local_storage.setItem("cache", null);
     cache_write();
 }

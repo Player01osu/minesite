@@ -13,6 +13,10 @@ function get_checked() {
     return checked_array;
 }
 
+function update_card_count() {
+    n_cards.textContent = cache.length() + " Cards";
+}
+
 function exists(item) {
     return item !== null && item !== undefined && item !== "";
 }
@@ -111,6 +115,7 @@ function new_card(text, content, image_path, audio_path) {
     if (exists(audio_path)) {
         const audio = new_audio(card_div, audio_path);
     }
+    update_card_count();
 
     return card_div;
 }
